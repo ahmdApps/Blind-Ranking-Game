@@ -1,0 +1,69 @@
+import random
+
+answer = " "
+rand = " "
+itemList = []
+rankList = [1, 2, 3, 4, 5]
+realRankList = [0, 0, 0, 0, 0]
+count = 0
+
+def clearConsoleLog():
+    print('\n' * 100)
+
+
+def itemPrompt(answer):
+  global count
+  while answer != "done":
+    answer = input("Enter item: ")
+    itemList.append(answer) 
+    count += 1
+  itemList.pop()
+  print(itemList)
+  clearConsoleLog()
+
+def selection():
+  global rand
+  rand = random.choice(itemList)
+  itemList.remove(rand)
+
+def ranking():
+  global rand
+  
+  while len(rankList) > 0:
+    selection()
+
+    rankInput = input(str(rand) + ": Rank this item at " + str(rankList) + ": ")
+
+    
+    if rankInput == "1":
+      realRankList[0] = rand
+      rankList.remove(1)
+    elif rankInput == "2":
+      realRankList[1] = rand
+      rankList.remove(2)
+    elif rankInput == "3":
+      realRankList[2] = rand
+      rankList.remove(3)
+    elif rankInput == "4":
+      realRankList[3] = rand
+      rankList.remove(4)
+    elif rankInput == "5":
+      realRankList[4] = rand
+      rankList.remove(5)
+
+
+input("Welcome to the Blind Ranking game! Press enter to continue.")
+print("Player 1, enter at least 5 items for player 2 to rank blindly.")
+print("Press enter to go to the next item.")
+
+itemPrompt(answer)
+
+input("Player 2, press enter to continue")
+ranking()
+
+print("Here are your final rankings: ")
+print("1: " + str(realRankList[0]))
+print("2: " + str(realRankList[1]))
+print("3: " + str(realRankList[2]))
+print("4: " + str(realRankList[3]))
+print("5: " + str(realRankList[4]))
